@@ -1,0 +1,4 @@
+# Port Mortem 2026 Hackathon Configuration
+Track = "F"
+Source_URL = "https://github.com/GoogleChromeLabs/jsbi"
+Kickoff_Hash = "9436BB4AFF95DB10BE4C1B6152B56CC039B1B05DE1E154A29DD6513FF9D65EB3"

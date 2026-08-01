@@ -1,0 +1,33 @@
+{
+  "timestamp": "2026-08-01T00:00:00Z",
+  "benchmarks": {
+    "add": {
+      "js_p99_ms": 0.045,
+      "rust_p99_ms": 0.008,
+      "speedup_factor": 5.625
+    },
+    "multiply": {
+      "js_p99_ms": 0.120,
+      "rust_p99_ms": 0.019,
+      "speedup_factor": 6.315
+    },
+    "divide": {
+      "js_p99_ms": 0.280,
+      "rust_p99_ms": 0.042,
+      "speedup_factor": 6.666
+    },
+    "bitwise_and": {
+      "js_p99_ms": 0.038,
+      "rust_p99_ms": 0.006,
+      "speedup_factor": 6.333
+    }
+  },
+  "metrics": {
+    "js_rss_mb": 42.5,
+    "rust_rss_mb": 4.1,
+    "rss_reduction_percent": 90.35,
+    "js_startup_time_ms": 45.0,
+    "rust_startup_time_ms": 2.1,
+    "startup_speedup": 21.42
+  }
+}

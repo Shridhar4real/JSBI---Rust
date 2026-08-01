@@ -1,0 +1,24 @@
+[package]
+name = "jsbi"
+version = "4.3.2"
+edition = "2021"
+authors = ["Port Mortem 2026 Hackathon Participant"]
+description = "Pure-Rust idiomatic port of JSBI (JavaScript BigInt Polyfill)"
+license = "Apache-2.0"
+
+[lib]
+name = "jsbi"
+path = "src/lib.rs"
+
+[[bin]]
+name = "jsbi-cli"
+path = "src/main.rs"
+
+[dependencies]
+# Zero external dependencies for 100% offline, zero-network compilation
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
