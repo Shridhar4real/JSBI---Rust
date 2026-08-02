@@ -4,7 +4,7 @@ An idiomatic, pure-Rust standalone port of [`GoogleChromeLabs/jsbi`](https://git
 
 ---
 
-## 1. Single-Step Build Command (Critical Rule)
+## 1. Single-Step Build Command 
 
 This project strictly satisfies the **"Standalone & Runnable"** hackathon requirement. The entire project (both the library and standalone CLI binary) compiles in one step using the release profile:
 
@@ -48,11 +48,11 @@ npm test
 
 ## 4. Bonus Points Claimed
 
-### 🛡️ Zero Unsafe (+5 Points)
+### 🛡️ Zero Unsafe 
 - **Status**: **CLAIMED**
 - **Verification**: Enforced crate-wide via `#![deny(unsafe_code)]` at the root of `src/lib.rs` and `src/main.rs`. Zero `unsafe` blocks exist in the entire codebase.
 
-### ⚡ Differential Fuzz Survivor (+5 Points)
+### ⚡ Differential Fuzz Survivor 
 - **Status**: **CLAIMED**
 - **Verification**: The port survived **65 continuous seconds** of intensive differential fuzzing, processing **486,013 randomized test cases** across arithmetic, bitwise, and edge-case inputs against the reference JS BigInt engine with **ZERO divergences**.
 - **Proof**: See [`fuzz/log.txt`](./fuzz/log.txt) and execute `cargo run --release --bin harness` to verify live.
@@ -61,7 +61,6 @@ npm test
 
 ## 5. Project Structure Overview
 
-Judges can inspect the repository structure as follows:
 
 - [`src/`](./src/): Safe, idiomatic Rust implementation (`lib.rs`, `bigint.rs`, `error.rs`, `main.rs`).
 - [`tests/original/`](./tests/original/): The 100% untouched original JavaScript test suite.
