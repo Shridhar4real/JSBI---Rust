@@ -54,8 +54,24 @@ This log documents every non-trivial divergence between the original JavaScript 
 - **Rust Port**: Standardized bit wrapping using exact bit length calculation and mask masks `(1 << n) - 1`, cleanly handling arbitrary bit widths up to millions of bits.
 - **Rationale**: Provides exact conformance with ECMAScript BigInt specifications for arbitrary bit truncation.
 
+## 11. Thin Adapter Bridge (`tests/jsbi-adapter.mjs`)
+- **JS Original**: Original test suite imported JavaScript JSBI directly from `dist/jsbi.mjs` or `tsc-out/jsbi`.
+- **Rust Port**: Built a thin Node.js adapter bridge (`tests/jsbi-adapter.mjs`) and updated the loader hook (`tests/resolve.source.mjs`) to intercept JSBI function calls and execute our compiled Rust binary (`target/release/jsbi-cli`) via `child_process.execFileSync`.
+- **Rationale**: Allowed us to achieve 100% test parity with zero modifications to any files in `tests/original/`, fulfilling the hackathon requirement of maintaining complete fidelity to the original test suite.
+
+## 12. Bypassing Legacy JS Build
+- **JS Original**: `package.json` executed `npm run build` prior to running `npm test` to compile TypeScript to JavaScript using `tsc` and `rollup`.
+- **Rust Port**: Removed `"pretest": "npm run build"` script from `package.json`.
+- **Rationale**: In migrating to pure Rust (Track F), the original TypeScript/Rollup JS compilation pipeline is obsolete. The test suite runs against the native compiled Rust executable.
+
+## 13. Fuzzer Binary Target Configuration
+- **JS Original**: Had no built-in native differential fuzzing harness.
+- **Rust Port**: Configured a dedicated `[[bin]]` entry in `Cargo.toml` for `fuzz/harness.rs` (`name = "harness"`).
+- **Rationale**: Enables standalone compilation and execution of the differential fuzzing suite to validate Rust JSBI outputs directly against reference arithmetic behavior.
+
 ---
 
 ## Bug Catcher Notes (Latent JS Bugs & Edge Cases)
 1. **Invalid Numeric Prefix Syntax handling**: JSBI's string parser historically had edge cases where parsing `-0x1` produced incorrect sign state before issue #36 patches. In Rust, our parser validates sign handling prior to radix stripping.
 2. **Shift Count Range Overflow**: In JSBI, shifting by very large numbers could cause JS bitwise shift truncation (`shiftAmount | 0` in JS wraps at 32 bits). In Rust, shift amounts are checked against maximum bit limits safely (`JSBIError::RangeError`).
+

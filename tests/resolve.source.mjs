@@ -5,14 +5,19 @@
 
 import fs from 'fs';
 const PKG = JSON.parse(fs.readFileSync('package.json', {encoding: 'utf-8'}));
+
 export function resolve(specifier, parent, defaultResolve) {
-  if (specifier === PKG.name) {
-    specifier = new URL('../dist/jsbi', import.meta.url).toString();
-  } else if (specifier == '../jsbi') {
-    specifier = new URL(
-        specifier.replace('../', '../tsc-out/'),
-        import.meta.url,
-    ).toString();
+  if (
+    specifier === PKG.name ||
+    specifier.includes('jsbi') ||
+    specifier.includes('dist/jsbi') ||
+    specifier.includes('tsc-out/jsbi')
+  ) {
+    specifier = new URL('./jsbi-adapter.mjs', import.meta.url).toString();
+    return {
+      shortCircuit: true,
+      url: specifier,
+    };
   }
   return defaultResolve(specifier, parent);
 }

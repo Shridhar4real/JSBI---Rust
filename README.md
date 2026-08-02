@@ -3,10 +3,23 @@
 This repository contains an idiomatic, pure-Rust port of [`GoogleChromeLabs/jsbi`](https://github.com/GoogleChromeLabs/jsbi) - the JavaScript BigInt polyfill.
 
 ## Single Build Command
-To compile the release binary and library:
+As required by the hackathon rules, the project is built in one step using the release profile:
 ```bash
 cargo build --release
 ```
+This single command compiles both the `jsbi` library and the `jsbi-cli` release binary into `target/release/`.
+
+## Running Tests
+To run the native Rust unit and integration test suite:
+```bash
+cargo test
+```
+
+To run the original JavaScript test suite via the thin adapter bridge:
+```bash
+npm test
+```
+
 
 ## Migration Rationale & Key Divergences
 The primary objective of this port is **strict behavioral equivalence** with the original JSBI implementation while embracing Rust's safety, strict typing, and memory model.
