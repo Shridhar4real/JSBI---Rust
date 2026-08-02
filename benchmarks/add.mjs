@@ -833,9 +833,9 @@ function hexParseN(s) {
 }
 function parseNative(d) {
   if (d.b) {
-    return {a: hexParseN(d.a), b: hexParseN(d.b), r: hexParseN(d.r)};
+    return { a: hexParseN(d.a), b: hexParseN(d.b), r: hexParseN(d.r) };
   }
-  return {a: hexParseN(d.a), r: hexParseN(d.r)};
+  return { a: hexParseN(d.a), r: hexParseN(d.r) };
 }
 function hexParse(s) {
   if (s.charCodeAt(0) === 0x2D) {
@@ -847,9 +847,9 @@ function hexParse(s) {
 }
 function parseJSBI(d) {
   if (d.b) {
-    return {a: hexParse(d.a), b: hexParse(d.b), r: hexParse(d.r)};
+    return { a: hexParse(d.a), b: hexParse(d.b), r: hexParse(d.r) };
   }
-  return {a: hexParse(d.a), r: hexParse(d.r)};
+  return { a: hexParse(d.a), r: hexParse(d.r) };
 }
 function prepareData(src, dstNative, dstJsbi) {
   for (let i = 0; i < src.length; i++) {
